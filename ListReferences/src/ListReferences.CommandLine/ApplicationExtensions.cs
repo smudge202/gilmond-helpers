@@ -1,7 +1,4 @@
 ﻿using Compose;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
-using System;
 
 namespace Gilmond.Helpers.ListReferences.CommandLine
 {
