@@ -6,7 +6,7 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 {
 	static class ServiceExtensions
 	{
-		public static IServiceCollection AddServices(this IServiceCollection services)
+		public static IServiceCollection AddConsoleServices(this IServiceCollection services)
 		{
 			services.TryAdd(GetDefaultServices());
 			return services;

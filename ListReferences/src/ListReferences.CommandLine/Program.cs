@@ -9,8 +9,10 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 			var app = new CommandLineApplication();
 			app.UseServices(services => 
 				services
-					.AddServices()
-					.ConfigureArguments(args));
+					.AddCoreServices()
+					.AddConsoleServices()
+					.ConfigureArguments(args)
+			);
 			app.ListReferences();
 			app.Execute();
 		}
