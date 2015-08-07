@@ -21,7 +21,7 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 
 		public static IEnumerable<ServiceDescriptor> GetDefaultServices()
 		{
-			yield break;
+			yield return ServiceDescriptor.Transient<ILogger, ColouredConsoleLogger>();
 		}
 	}
 }
