@@ -21,6 +21,9 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 
 					foreach (var reference in references.OrderBy(x => x.FullName))
 						logger.LogReference(reference);
+
+					references.OutputAsJson();
+
 					return 0;
 				}
 				catch (Exception ex)
