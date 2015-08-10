@@ -23,9 +23,20 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 					foreach (var reference in references.OrderBy(x => x.FullName))
 						logger.LogReference(reference);
 
+					var warnings = app.ApplicationServices.GetService<IList<Warning>>();
+					foreach (var reference in references.Where(x => !x.References.All(y => y.Location == x.References.First().Location)))
+						foreach(var inconsistentLocation in reference.References
+							.GroupBy(x => x.Location, (location, refs) => new { Location = location, References = refs }))
+							warnings.Add(new Warning
+							{
+								Consumer = $"{inconsistentLocation.References.Count()} references to {inconsistentLocation.Location}",
+								Dependency = reference.FullName,
+								ExceptionType = "InconsistentDependencyLocations"
+							});
+
 					references.OutputAsJson();
 
-					app.ApplicationServices.GetService<IList<Warning>>().OutputAsJson();
+					warnings.OutputAsJson();
 
 					return 0;
 				}

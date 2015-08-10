@@ -43,7 +43,7 @@ namespace Gilmond.Helpers.ListReferences
 		{
 			var assemblyPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(projectPath), arg.Value));
 			if (!File.Exists(assemblyPath))
-				return UnableToFindReference(assemblyPath);
+				return UnableToFindReference(projectPath, assemblyPath);
 			return FoundReference(projectPath, assemblyPath);
 		}
 
@@ -51,7 +51,7 @@ namespace Gilmond.Helpers.ListReferences
 		{
 			return Cache
 				.GetOrAdd(assemblyPath, x => GenerateProject(projectPath, x))
-				.GetOrAdd(projectPath, x => GenerateReference(projectPath, x));
+				.GetOrAdd(projectPath, x => GenerateReference(projectPath, assemblyPath));
 		}
 
 		private ConcurrentDictionary<string, Reference> GenerateProject(string projectPath, string assemblyPath)
@@ -85,8 +85,9 @@ namespace Gilmond.Helpers.ListReferences
 			}
 		}
 
-		private Reference UnableToFindReference(string hintPath)
+		private Reference UnableToFindReference(string projectPath, string hintPath)
 		{
+			_warnings.Add(new Warning { Consumer = projectPath, Dependency = hintPath, ExceptionType = "FileNotFound" });
 			_logger.LogWarning($"Unable to locate reference:\r\n\t{hintPath}");
 			return default(Reference);
 		}
