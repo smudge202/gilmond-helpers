@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Gilmond.Helpers.ListReferences
 {
@@ -20,7 +21,10 @@ namespace Gilmond.Helpers.ListReferences
 
 		public IEnumerable<string> GetProjectFilePaths()
 		{
-			return Directory.GetFiles(_solutionDirectory, "*.csproj", SearchOption.AllDirectories);
+			return 
+				Directory.GetFiles(_solutionDirectory, "*.csproj", SearchOption.AllDirectories)
+					.Union(
+				Directory.GetFiles(_solutionDirectory, "*.vbproj", SearchOption.AllDirectories));
 		}
 	}
 }
