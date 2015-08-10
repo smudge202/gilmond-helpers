@@ -1,6 +1,6 @@
 # List References
 
-This project is designed to list all the assemblies referenced by Visual Studio Project Files (*csproj & *vbproj).
+This project is designed to list all the assemblies referenced by Visual Studio Project Files (`*.csproj` & `*.vbproj`).
 
 ## Usage
 
