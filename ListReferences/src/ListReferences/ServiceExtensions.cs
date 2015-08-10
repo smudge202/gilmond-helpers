@@ -16,10 +16,7 @@ namespace Gilmond.Helpers.ListReferences
 
 		public static IServiceCollection Configure(this IServiceCollection services, string path)
 		{
-			var configuration = new ConfigurationBuilder()
-				.AddEnvironmentVariables()
-				.Build();
-			var solutionPath = Path.Combine(configuration["PROJECTS_ROOT"] ?? string.Empty, path);
+			var solutionPath = GetSolutionPath(path);
 			if (!Directory.Exists(solutionPath))
 				throw new InvalidOperationException(string.Format(InvalidConfigurationTemplate, path));
 
@@ -29,6 +26,16 @@ namespace Gilmond.Helpers.ListReferences
 				{
 					config.SolutionPath = solutionPath;
 				});
+		}
+
+		private static string GetSolutionPath(string path)
+		{
+			if (Directory.Exists(path))
+				return path;
+			var configuration = new ConfigurationBuilder()
+				.AddEnvironmentVariables()
+				.Build();
+			return Path.Combine(configuration["PROJECTS_ROOT"] ?? string.Empty, path);
 		}
 
 		public static IServiceCollection AddCoreServices(this IServiceCollection services)
