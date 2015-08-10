@@ -1,5 +1,6 @@
 ﻿using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
+using System;
 using System.Collections.Generic;
 
 namespace Gilmond.Helpers.ListReferences.CommandLine
@@ -14,9 +15,9 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 
 		public static IServiceCollection ConfigureArguments(this IServiceCollection services, string[] args)
 		{
-			services.AddOptions();
-			services.Configure<UnparsedArguments>(config => config.Arguments = args);
-			return services;
+			if (args == null || args.Length != 1)
+				throw new InvalidOperationException("Must supply solution root directory as only argument.");
+			return services.Configure(args[0]);
 		}
 
 		public static IEnumerable<ServiceDescriptor> GetDefaultServices()

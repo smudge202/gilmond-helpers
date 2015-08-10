@@ -42,6 +42,10 @@
       <HintPath>..\..\packages\Microsoft.Framework.Configuration.Binder.1.0.0-beta6\lib\net45\Microsoft.Framework.Configuration.Binder.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Framework.Configuration.EnvironmentVariables, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Framework.Configuration.EnvironmentVariables.1.0.0-beta6\lib\net45\Microsoft.Framework.Configuration.EnvironmentVariables.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Framework.DependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Framework.DependencyInjection.1.0.0-beta6\lib\net45\Microsoft.Framework.DependencyInjection.dll</HintPath>
       <Private>True</Private>
