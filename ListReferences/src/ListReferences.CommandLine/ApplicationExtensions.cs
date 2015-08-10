@@ -35,7 +35,6 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 							});
 
 					references.OutputAsJson();
-
 					warnings.OutputAsJson();
 
 					return 0;
