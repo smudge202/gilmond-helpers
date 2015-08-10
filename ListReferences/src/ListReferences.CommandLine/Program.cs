@@ -1,4 +1,5 @@
 ﻿using Compose;
+using System;
 
 namespace Gilmond.Helpers.ListReferences.CommandLine
 {
@@ -14,7 +15,14 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 					.ConfigureArguments(args)
 			);
 			app.ListReferences();
-			app.Execute();
+			try
+			{
+				app.Execute();
+			}
+			finally
+			{
+				Console.ReadKey();
+			}
 		}
 	}
 }

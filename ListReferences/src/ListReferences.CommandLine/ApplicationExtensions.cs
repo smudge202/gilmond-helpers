@@ -1,4 +1,8 @@
 ﻿using Compose;
+using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Logging;
+using System;
+using System.Linq;
 
 namespace Gilmond.Helpers.ListReferences.CommandLine
 {
@@ -8,8 +12,18 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 		{
 			app.OnExecute<ListReferences>(process =>
 			{
-				
-				return 0;
+				var logger = app.ApplicationServices.GetService<ILogger>();
+				try
+				{
+					foreach (var reference in process.GetDistinctReferences().OrderBy(x => x.FullName))
+						logger.LogInformation($"{reference.FullName}\r\n\t{reference.Location}");
+					return 0;
+				}
+				catch (Exception ex)
+				{
+					logger.LogCritical("Unhandled Exception", ex);
+					return 1;
+				}
 			});
 		}
 	}
