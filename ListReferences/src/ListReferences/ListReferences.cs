@@ -2,5 +2,6 @@
 {
 	public interface ListReferences
 	{
+		void GetDistinctReferences();
 	}
 }

@@ -2,5 +2,6 @@
 {
 	interface LocateProjectFiles
 	{
+		void GetProjectFilePaths();
 	}
 }

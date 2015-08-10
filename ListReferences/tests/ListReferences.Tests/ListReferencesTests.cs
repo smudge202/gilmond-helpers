@@ -28,5 +28,13 @@ namespace Gilmond.Helpers.ListReferences.Tests
 			Action act = () => new DefaultListReferences(null);
 			act.ShouldThrow<ArgumentNullException>();
 		}
+
+		[Unit]
+		public static void WhenInvokedThenGetsProjectPaths()
+		{
+			var files = new Mock<LocateProjectFiles>();
+			CreateTarget(files: files.Object).GetDistinctReferences();
+			files.Verify(m => m.GetProjectFilePaths(), Times.Once);
+		}
 	}
 }
