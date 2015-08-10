@@ -1,7 +1,9 @@
-﻿namespace Gilmond.Helpers.ListReferences
+﻿using System.Collections.Generic;
+
+namespace Gilmond.Helpers.ListReferences
 {
 	public interface ListReferences
 	{
-		void GetDistinctReferences();
+		IReadOnlyCollection<Reference> GetDistinctReferences();
 	}
 }

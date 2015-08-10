@@ -1,7 +1,9 @@
-﻿namespace Gilmond.Helpers.ListReferences
+﻿using System.Collections.Generic;
+
+namespace Gilmond.Helpers.ListReferences
 {
 	interface RetrieveReferencesFromProjectFile
 	{
-		void GetReferences(string path);
+		IEnumerable<Reference> GetReferences(string path);
 	}
 }

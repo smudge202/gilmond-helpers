@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Gilmond.Helpers.ListReferences
 {
@@ -17,10 +19,13 @@ namespace Gilmond.Helpers.ListReferences
 			_reader = reader;
 		}
 
-		public void GetDistinctReferences()
+		public IReadOnlyCollection<Reference> GetDistinctReferences()
 		{
-			foreach (var path in _files.GetProjectFilePaths())
-				_reader.GetReferences(path);
+			return _files
+				.GetProjectFilePaths()
+				.SelectMany(projectFilePath => _reader.GetReferences(projectFilePath))
+				.ToList()
+				.AsReadOnly();
 		}
 	}
 }

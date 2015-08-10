@@ -52,6 +52,7 @@
     <Compile Include="ListReferences.cs" />
     <Compile Include="LocateProjectFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reference.cs" />
     <Compile Include="RetrieveReferencesFromProjectFile.cs" />
     <Compile Include="ServiceExtensions.cs" />
   </ItemGroup>
