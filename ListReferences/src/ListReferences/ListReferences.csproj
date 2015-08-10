@@ -81,6 +81,7 @@
     <Compile Include="RetrieveReferencesFromProjectFile.cs" />
     <Compile Include="ServiceExtensions.cs" />
     <Compile Include="SolutionConfiguration.cs" />
+    <Compile Include="Warning.cs" />
     <Compile Include="XmlLinqProjectFileReader.cs" />
   </ItemGroup>
   <ItemGroup>

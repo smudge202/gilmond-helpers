@@ -16,11 +16,14 @@ namespace Gilmond.Helpers.ListReferences
 			= new ConcurrentDictionary<string, ConcurrentDictionary<string, Reference>>();
 
 		private readonly ILogger _logger;
+		private readonly IList<Warning> _warnings;
 
-		public XmlLinqProjectFileReader(ILogger logger)
+		public XmlLinqProjectFileReader(ILogger logger, IList<Warning> warnings)
 		{
 			if (logger == null) throw new ArgumentNullException(nameof(logger));
+			if (warnings == null) throw new ArgumentException(nameof(warnings));
 			_logger = logger;
+			_warnings = warnings;
 		}
 
 		public IEnumerable<Reference> GetReferences(string path)
@@ -72,10 +75,12 @@ namespace Gilmond.Helpers.ListReferences
 			}
 			catch (FileLoadException flex)
 			{
+				_warnings.Add(new Warning { Consumer = projectPath, Dependency = assemblyPath, ExceptionType = "FileLoadException" });
 				return UnableToLoadReference(assemblyPath, flex);
 			}
 			catch (BadImageFormatException bifex)
 			{
+				_warnings.Add(new Warning { Consumer = projectPath, Dependency = assemblyPath, ExceptionType = "BadImageException" });
 				return UnableToLoadReference(assemblyPath, bifex);
 			}
 		}

@@ -2,6 +2,7 @@
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Gilmond.Helpers.ListReferences.CommandLine
@@ -23,6 +24,8 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 						logger.LogReference(reference);
 
 					references.OutputAsJson();
+
+					app.ApplicationServices.GetService<IList<Warning>>().OutputAsJson();
 
 					return 0;
 				}

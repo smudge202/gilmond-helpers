@@ -7,14 +7,13 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 	{
 		public string FullName { get; set; }
 		public IEnumerable<Reference> References { get; set; }
-		public string Location
+		public string ExampleLocation
 		{
 			get
 			{
 				return References?.FirstOrDefault().Location;
 			}
 		}
-
 		public int Count
 		{
 			get
