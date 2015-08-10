@@ -80,6 +80,7 @@
     <Compile Include="LoggerExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceAnalysis.cs" />
     <Compile Include="ServiceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

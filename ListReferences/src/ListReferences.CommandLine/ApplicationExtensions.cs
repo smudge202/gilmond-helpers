@@ -15,7 +15,11 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 				var logger = app.ApplicationServices.GetService<ILogger>();
 				try
 				{
-					foreach (var reference in process.GetDistinctReferences().OrderBy(x => x.FullName))
+					var references = process
+						.GetReferences()
+						.GroupBy(x => x.FullName, (name, refs) => new ReferenceAnalysis { FullName = name, References = refs });
+
+					foreach (var reference in references.OrderBy(x => x.FullName))
 						logger.LogReference(reference);
 					return 0;
 				}

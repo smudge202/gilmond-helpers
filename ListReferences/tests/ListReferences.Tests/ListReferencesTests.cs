@@ -1,14 +1,15 @@
 ﻿using FluentAssertions;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TestAttributes;
 
 namespace Gilmond.Helpers.ListReferences.Tests
 {
-	public class ListReferencesTests
+	public abstract class ListReferencesTests
 	{
-		private static ListReferences CreateTarget(
+		internal static ListReferences CreateTarget(
 			LocateProjectFiles files = null,
 			RetrieveReferencesFromProjectFile reader = null)
 		{
@@ -33,7 +34,7 @@ namespace Gilmond.Helpers.ListReferences.Tests
 			}
 		}
 
-		private static string GenerateRandomString
+		protected static string GenerateRandomString
 		{
 			get
 			{
@@ -41,22 +42,24 @@ namespace Gilmond.Helpers.ListReferences.Tests
 			}
 		}
 
+		protected abstract IReadOnlyCollection<Reference> Invoke(ListReferences target);
+
 		[Unit]
-		public static void WhenFileLocatorNotProvidedThenThrowsException()
+		public void WhenFileLocatorNotProvidedThenThrowsException()
 		{
 			Action act = () => new DefaultListReferences(null, DefaultReader);
 			act.ShouldThrow<ArgumentNullException>();
 		}
 
 		[Unit]
-		public static void WhenFileReaderNotProvidedThenThrowsException()
+		public void WhenFileReaderNotProvidedThenThrowsException()
 		{
 			Action act = () => new DefaultListReferences(DefaultFiles, null);
 			act.ShouldThrow<ArgumentNullException>();
 		}
 
 		[Unit]
-		public static void WhenInvokedThenGetsProjectPaths()
+		public void WhenInvokedThenGetsProjectPaths()
 		{
 			var files = new Mock<LocateProjectFiles>();
 			CreateTarget(files: files.Object).GetDistinctReferences();
@@ -64,7 +67,7 @@ namespace Gilmond.Helpers.ListReferences.Tests
 		}
 
 		[Unit]
-		public static void WhenPathYieldedThenPassesToDeserializer()
+		public void WhenPathYieldedThenPassesToDeserializer()
 		{
 			var files = new Mock<LocateProjectFiles>();
 			var path = GenerateRandomString;
@@ -74,21 +77,6 @@ namespace Gilmond.Helpers.ListReferences.Tests
 			CreateTarget(files: files.Object, reader: reader.Object).GetDistinctReferences();
 
 			reader.Verify(m => m.GetReferences(path), Times.Once);
-		}
-
-		[Unit]
-		public static void WhenReferencesDuplicatedThenDistinctsResult()
-		{
-			var files = new Mock<LocateProjectFiles>();
-			files.Setup(m => m.GetProjectFilePaths()).Returns(new[] { GenerateRandomString, GenerateRandomString});
-			var reader = new Mock<RetrieveReferencesFromProjectFile>();
-			var duplicateReference = new Reference { FullName = GenerateRandomString, Location = GenerateRandomString };
-			reader.Setup(m => m.GetReferences(It.IsAny<string>())).Returns(new[] { duplicateReference });
-
-			var result = CreateTarget(files: files.Object, reader: reader.Object).GetDistinctReferences();
-
-			result.Should().Contain(duplicateReference);
-			result.Should().OnlyHaveUniqueItems();
 		}
 	}
 }

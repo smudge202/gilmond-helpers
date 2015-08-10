@@ -19,14 +19,26 @@ namespace Gilmond.Helpers.ListReferences
 			_reader = reader;
 		}
 
+		public IReadOnlyCollection<Reference> GetReferences()
+		{
+			return GetProjectReferences()
+				.ToList()
+				.AsReadOnly();
+		}
+
 		public IReadOnlyCollection<Reference> GetDistinctReferences()
 		{
-			return _files
-				.GetProjectFilePaths()
-				.SelectMany(projectFilePath => _reader.GetReferences(projectFilePath))
+			return GetProjectReferences()
 				.Distinct()
 				.ToList()
 				.AsReadOnly();
 		}
+
+		private IEnumerable<Reference> GetProjectReferences()
+		{
+			return _files
+				.GetProjectFilePaths()
+				.SelectMany(projectFilePath => _reader.GetReferences(projectFilePath));
+        }
 	}
 }
