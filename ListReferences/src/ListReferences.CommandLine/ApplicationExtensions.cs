@@ -16,7 +16,7 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 				try
 				{
 					foreach (var reference in process.GetDistinctReferences().OrderBy(x => x.FullName))
-						logger.LogInformation($"{reference.FullName}\r\n\t{reference.Location}");
+						logger.LogReference(reference);
 					return 0;
 				}
 				catch (Exception ex)
