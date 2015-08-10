@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
 using System;
+using System.Linq;
 using TestAttributes;
 
 namespace Gilmond.Helpers.ListReferences.Tests
@@ -73,6 +74,21 @@ namespace Gilmond.Helpers.ListReferences.Tests
 			CreateTarget(files: files.Object, reader: reader.Object).GetDistinctReferences();
 
 			reader.Verify(m => m.GetReferences(path), Times.Once);
+		}
+
+		[Unit]
+		public static void WhenReferencesDuplicatedThenDistinctsResult()
+		{
+			var files = new Mock<LocateProjectFiles>();
+			files.Setup(m => m.GetProjectFilePaths()).Returns(new[] { GenerateRandomString, GenerateRandomString});
+			var reader = new Mock<RetrieveReferencesFromProjectFile>();
+			var duplicateReference = new Reference { FullName = GenerateRandomString, Location = GenerateRandomString };
+			reader.Setup(m => m.GetReferences(It.IsAny<string>())).Returns(new[] { duplicateReference });
+
+			var result = CreateTarget(files: files.Object, reader: reader.Object).GetDistinctReferences();
+
+			result.Should().Contain(duplicateReference);
+			result.Should().OnlyHaveUniqueItems();
 		}
 	}
 }

@@ -24,6 +24,7 @@ namespace Gilmond.Helpers.ListReferences
 			return _files
 				.GetProjectFilePaths()
 				.SelectMany(projectFilePath => _reader.GetReferences(projectFilePath))
+				.Distinct()
 				.ToList()
 				.AsReadOnly();
 		}
