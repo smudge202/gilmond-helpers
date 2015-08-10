@@ -11,8 +11,9 @@ namespace Gilmond.Helpers.ListReferences
 {
 	sealed class XmlLinqProjectFileReader : RetrieveReferencesFromProjectFile
 	{
-		private static ConcurrentDictionary<string, Reference> Cache 
-			= new ConcurrentDictionary<string, Reference>();
+		// Assembly Path -> Project Path -> Reference
+		private static ConcurrentDictionary<string, ConcurrentDictionary<string, Reference>> Cache
+			= new ConcurrentDictionary<string, ConcurrentDictionary<string, Reference>>();
 
 		private readonly ILogger _logger;
 
@@ -35,20 +36,29 @@ namespace Gilmond.Helpers.ListReferences
 				.Where(reference => !reference.Equals(default(Reference)));
 		}
 
-		private Reference TryConstructReference(string path, XElement arg)
+		private Reference TryConstructReference(string projectPath, XElement arg)
 		{
-			var assemblyPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(path), arg.Value));
+			var assemblyPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(projectPath), arg.Value));
 			if (!File.Exists(assemblyPath))
 				return UnableToFindReference(assemblyPath);
-			return FoundReference(assemblyPath);
+			return FoundReference(projectPath, assemblyPath);
 		}
 
-		private Reference FoundReference(string assemblyPath)
+		private Reference FoundReference(string projectPath, string assemblyPath)
 		{
-			return Cache.GetOrAdd(assemblyPath, GenerateReference);
+			return Cache
+				.GetOrAdd(assemblyPath, x => GenerateProject(projectPath, x))
+				.GetOrAdd(projectPath, x => GenerateReference(projectPath, x));
 		}
 
-		private Reference GenerateReference(string assemblyPath)
+		private ConcurrentDictionary<string, Reference> GenerateProject(string projectPath, string assemblyPath)
+		{
+			var result = new ConcurrentDictionary<string, Reference>();
+			result.GetOrAdd(projectPath, x => GenerateReference(projectPath, assemblyPath));
+			return result;
+		}
+
+		private Reference GenerateReference(string projectPath, string assemblyPath)
 		{
 			try
 			{
@@ -56,7 +66,8 @@ namespace Gilmond.Helpers.ListReferences
 				return new Reference
 				{
 					FullName = assembly.FullName,
-					Location = assembly.Location
+					Location = assembly.Location,
+					Consumer = projectPath
 				};
 			}
 			catch (FileLoadException flex)

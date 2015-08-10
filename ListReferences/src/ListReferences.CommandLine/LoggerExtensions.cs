@@ -16,7 +16,7 @@ namespace Gilmond.Helpers.ListReferences.CommandLine
 
 		public static void OutputAsJson(this IEnumerable<ReferenceAnalysis> references)
 		{
-			using (var fileStream = File.OpenWrite("references.json"))
+			using (var fileStream = File.Open("references.json", FileMode.CreateNew, FileAccess.Write))
 			using (var writer = new StreamWriter(fileStream))
 				writer.Write(JsonConvert.SerializeObject(references, Formatting.Indented));
 		}
