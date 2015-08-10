@@ -13,7 +13,9 @@ namespace Gilmond.Helpers.ListReferences
 
 		public static IEnumerable<ServiceDescriptor> GetDefaultServices()
 		{
-			yield break;
+			yield return ServiceDescriptor.Transient<RetrieveReferencesFromProjectFile, XmlLinqProjectFileReader>();
+			yield return ServiceDescriptor.Transient<LocateProjectFiles, DirectoryGetFilesLocator>();
+			yield return ServiceDescriptor.Transient<ListReferences, DefaultListReferences>();
 		}
 	}
 }
