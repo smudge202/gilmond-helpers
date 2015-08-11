@@ -2,7 +2,7 @@
 
 namespace Mvp.WinForms
 {
-	public partial class MainForm : Form
+	public partial class MainForm : Form, MainView
 	{
 		public MainForm()
 		{

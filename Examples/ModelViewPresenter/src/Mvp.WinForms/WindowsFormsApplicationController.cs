@@ -2,8 +2,13 @@
 
 namespace Mvp.WinForms
 {
-	sealed class WindowsFormsApplicationController : IApplicationController
+	sealed class WindowsFormsApplicationController : ApplicationController
 	{
+		public void Start(object form)
+		{
+			Application.Run(form as Form);
+		}
+
 		public void Exit()
 		{
 			Application.Exit();

@@ -1,5 +1,6 @@
-﻿ using Microsoft.Framework.DependencyInjection;
+﻿using Microsoft.Framework.DependencyInjection;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Mvp.WinForms
 {
@@ -13,8 +14,9 @@ namespace Mvp.WinForms
 
 		public static IEnumerable<ServiceDescriptor> GetDefaultViews()
 		{
-			yield return ServiceDescriptor.Transient<IApplicationController, WindowsFormsApplicationController>();
-			yield return ServiceDescriptor.Transient<MainForm, MainForm>();
+			yield return ServiceDescriptor.Transient<MainView, MainForm>();
+			yield return ServiceDescriptor.Transient<ApplicationController, WindowsFormsApplicationController>();
+			yield return ServiceDescriptor.Transient<MainPresenter, MainPresenter>();
 		}
 	}
 }

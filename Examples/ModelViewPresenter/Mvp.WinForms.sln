@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{18AA1C16-CBB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvp.WinForms", "src\Mvp.WinForms\Mvp.WinForms.csproj", "{24A66938-C37C-47A6-8F59-FE697D958C33}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{38E4C160-EC0E-437F-ACC3-916D8C7C05FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvp.WinForms.Tests", "tests\Mvp.WinForms.Tests\Mvp.WinForms.Tests.csproj", "{28AD40EE-B652-42E4-BBB8-13B84487D945}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +21,16 @@ Global
 		{24A66938-C37C-47A6-8F59-FE697D958C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24A66938-C37C-47A6-8F59-FE697D958C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24A66938-C37C-47A6-8F59-FE697D958C33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28AD40EE-B652-42E4-BBB8-13B84487D945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28AD40EE-B652-42E4-BBB8-13B84487D945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28AD40EE-B652-42E4-BBB8-13B84487D945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28AD40EE-B652-42E4-BBB8-13B84487D945}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{24A66938-C37C-47A6-8F59-FE697D958C33} = {18AA1C16-CBB7-4ACA-921D-DDE4C4DD2DC4}
+		{28AD40EE-B652-42E4-BBB8-13B84487D945} = {38E4C160-EC0E-437F-ACC3-916D8C7C05FF}
 	EndGlobalSection
 EndGlobal

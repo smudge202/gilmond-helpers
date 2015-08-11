@@ -1,5 +1,4 @@
 ﻿using Compose;
-using Microsoft.Framework.DependencyInjection;
 
 namespace Mvp.WinForms
 {
@@ -8,10 +7,7 @@ namespace Mvp.WinForms
 	{
 		public static void UseMvpExample(this Executable app)
 		{
-			app.OnExecute(() =>
-			{
-				Application.Run(app.ApplicationServices.GetRequiredService<MainForm>());
-			});
+			app.OnExecute<MainPresenter>(presenter => { });
 		}
 	}
 }
