@@ -1,7 +1,7 @@
 ﻿using Compose;
 using System;
 
-namespace Mvp.WinForms
+namespace Gilmond.Examples.Mvp.WinForms
 {
 	static class Program
 	{

@@ -8,8 +8,8 @@
     <ProjectGuid>{28AD40EE-B652-42E4-BBB8-13B84487D945}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mvp.WinForms.Tests</RootNamespace>
-    <AssemblyName>Mvp.WinForms.Tests</AssemblyName>
+    <RootNamespace>Gilmond.Examples.Mvp.WinForms.Tests</RootNamespace>
+    <AssemblyName>Gilmond.Examples.Mvp.WinForms.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

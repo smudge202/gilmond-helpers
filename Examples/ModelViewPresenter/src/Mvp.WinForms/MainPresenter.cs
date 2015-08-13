@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Mvp.WinForms
+namespace Gilmond.Examples.Mvp.WinForms
 {
 	sealed class MainPresenter
 	{

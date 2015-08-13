@@ -4,7 +4,7 @@ using System;
 using System.Windows.Forms;
 using TestAttributes;
 
-namespace Mvp.WinForms.Tests
+namespace Gilmond.Examples.Mvp.WinForms.Tests
 {
 	public class MainPresenterTests
 	{

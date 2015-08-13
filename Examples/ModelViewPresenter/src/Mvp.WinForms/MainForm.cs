@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Mvp.WinForms
+namespace Gilmond.Examples.Mvp.WinForms
 {
 	public partial class MainForm : Form, MainView
 	{

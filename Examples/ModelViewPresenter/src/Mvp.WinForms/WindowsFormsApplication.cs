@@ -1,6 +1,6 @@
 ﻿using Compose;
 
-namespace Mvp.WinForms
+namespace Gilmond.Examples.Mvp.WinForms
 {
 	using System.Windows.Forms;
 	internal sealed class WindowsFormsApplication : Executable

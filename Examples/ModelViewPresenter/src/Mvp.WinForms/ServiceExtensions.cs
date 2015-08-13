@@ -1,8 +1,7 @@
 ﻿using Microsoft.Framework.DependencyInjection;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
-namespace Mvp.WinForms
+namespace Gilmond.Examples.Mvp.WinForms
 {
 	static class ServiceExtensions
 	{

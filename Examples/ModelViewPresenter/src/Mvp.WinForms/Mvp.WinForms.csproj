@@ -7,8 +7,8 @@
     <ProjectGuid>{24A66938-C37C-47A6-8F59-FE697D958C33}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mvp.WinForms</RootNamespace>
-    <AssemblyName>Mvp.WinForms</AssemblyName>
+    <RootNamespace>Gilmond.Examples.Mvp.WinForms</RootNamespace>
+    <AssemblyName>Gilmond.Examples.Mvp.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -81,6 +81,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

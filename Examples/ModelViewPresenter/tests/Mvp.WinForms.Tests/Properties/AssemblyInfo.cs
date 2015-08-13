@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Mvp.WinForms.Tests")]
+[assembly: AssemblyTitle("Gilmond.Examples.Mvp.WinForms.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Mvp.WinForms.Tests")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
+[assembly: AssemblyCompany("Gilmond")]
+[assembly: AssemblyProduct("Gilmond.Examples.Mvp.WinForms.Tests")]
+[assembly: AssemblyCopyright("Copyright © Gilmond 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

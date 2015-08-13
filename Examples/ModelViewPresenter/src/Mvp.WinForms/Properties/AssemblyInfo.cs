@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Mvp.WinForms")]
+[assembly: AssemblyTitle("Gilmond.Examples.Mvp.WinForms")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Mvp.WinForms")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
+[assembly: AssemblyCompany("Gilmond")]
+[assembly: AssemblyProduct("Gilmond.Examples.Mvp.WinForms")]
+[assembly: AssemblyCopyright("Copyright © Gilmond 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,5 +34,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: InternalsVisibleTo("Mvp.WinForms.Tests")]
+[assembly: InternalsVisibleTo("Gilmond.Examples.Mvp.WinForms.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
