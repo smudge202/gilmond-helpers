@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Service Extension</Name>
+    <Description>Gilmond Consulting Template - Add service collections to your projects and pull in the correct NuGet packages.</Description>
+    <Icon>logo.ico</Icon>
+    <TemplateID>951fc3b9-2b78-4127-8cb7-836bf2ac125a</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>ServiceExtensions.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true">ServiceExtensions.cs</ProjectItem>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>NuGet.VisualStudio.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>NuGet.VisualStudio.TemplateWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <packages repository="extension" repositoryId="Gilmond.CodeGate.874d7a14-952f-4484-84f5-f1e961bc3f92">
+      <package id="Microsoft.Framework.DependencyInjection" version="1.0.0-beta6" />
+      <package id="Microsoft.Framework.DependencyInjection.Abstractions" version="1.0.0-beta6" />
+    </packages>
+  </WizardData>
+</VSTemplate>

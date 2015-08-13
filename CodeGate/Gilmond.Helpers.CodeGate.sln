@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B8550527
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGate.FxCop", "src\CodeGate.FxCop\CodeGate.FxCop.csproj", "{BB4643B7-4CB1-498C-B623-CB9ECDE937BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGate.Installer", "src\CodeGate.Installer\CodeGate.Installer.csproj", "{472E0302-F255-4972-99D9-C7063B227E51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGate.ServiceExtension", "src\CodeGate.ServiceExtension\CodeGate.ServiceExtension.csproj", "{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,11 +29,29 @@ Global
 		{BB4643B7-4CB1-498C-B623-CB9ECDE937BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB4643B7-4CB1-498C-B623-CB9ECDE937BA}.Release|x86.ActiveCfg = Release|x86
 		{BB4643B7-4CB1-498C-B623-CB9ECDE937BA}.Release|x86.Build.0 = Release|x86
+		{472E0302-F255-4972-99D9-C7063B227E51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{472E0302-F255-4972-99D9-C7063B227E51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{472E0302-F255-4972-99D9-C7063B227E51}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{472E0302-F255-4972-99D9-C7063B227E51}.Debug|x86.Build.0 = Debug|Any CPU
+		{472E0302-F255-4972-99D9-C7063B227E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{472E0302-F255-4972-99D9-C7063B227E51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{472E0302-F255-4972-99D9-C7063B227E51}.Release|x86.ActiveCfg = Release|Any CPU
+		{472E0302-F255-4972-99D9-C7063B227E51}.Release|x86.Build.0 = Release|Any CPU
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}.Debug|x86.Build.0 = Debug|Any CPU
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}.Release|x86.ActiveCfg = Release|Any CPU
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BB4643B7-4CB1-498C-B623-CB9ECDE937BA} = {5BFF5983-3ABD-4DA3-A724-471D4477B980}
+		{472E0302-F255-4972-99D9-C7063B227E51} = {5BFF5983-3ABD-4DA3-A724-471D4477B980}
+		{91FC89E2-B7FF-4FDD-BD22-4878FDF94742} = {5BFF5983-3ABD-4DA3-A724-471D4477B980}
 	EndGlobalSection
 EndGlobal

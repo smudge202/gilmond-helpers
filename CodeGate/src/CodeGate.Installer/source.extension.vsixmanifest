@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="Gilmond.CodeGate.874d7a14-952f-4484-84f5-f1e961bc3f92" Version="0.0.1" Language="en-US" Publisher="Gilmond Consulting" />
+    <DisplayName>Gilmond Consulting Code Gate</DisplayName>
+    <Description xml:space="preserve">Installs Solution Templates, Project Templates, and Code Analysis utilities in use at Gilmond Consulting.</Description>
+    <MoreInfo>http://blog.devbot.net</MoreInfo>
+    <License>https://raw.githubusercontent.com/smudge202/gilmond-helpers/dev/LICENSE</License>
+    <Icon>logo.ico</Icon>
+    <Tags>Gilmond Consulting</Tags>
+  </Metadata>
+  <Installation AllUsers="true">
+    <InstallationTarget Version="[13.0,15.0)" Id="Microsoft.VisualStudio.Pro" />
+    <InstallationTarget Version="[13.0,15.0)" Id="Microsoft.VisualStudio.Enterprise" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="CodeGate.ServiceExtension" d:TargetPath="|CodeGate.ServiceExtension;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+  </Assets>
+</PackageManifest>
