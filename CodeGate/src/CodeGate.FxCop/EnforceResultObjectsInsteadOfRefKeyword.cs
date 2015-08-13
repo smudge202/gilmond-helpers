@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.FxCop.Sdk;
+﻿using Microsoft.FxCop.Sdk;
 using System.Linq;
 
 namespace Gilmond.Helpers.CodeGate.FxCop
@@ -32,6 +31,8 @@ namespace Gilmond.Helpers.CodeGate.FxCop
 			Problems.Add(new Problem(GetNamedResolution(resolutionName, parameterName)));
 		}
 
-		private void IntentionalIssue(ref string shit) { }
+		private void IntentionalIssue(ref string foo) { }
+
+		private object IntentionalIssue(ref int bar) { return null; }
 	}
 }
