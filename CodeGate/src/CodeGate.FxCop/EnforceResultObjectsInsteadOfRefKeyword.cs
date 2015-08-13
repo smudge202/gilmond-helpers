@@ -30,9 +30,5 @@ namespace Gilmond.Helpers.CodeGate.FxCop
 		{
 			Problems.Add(new Problem(GetNamedResolution(resolutionName, parameterName)));
 		}
-
-		private void IntentionalIssue(ref string foo) { }
-
-		private object IntentionalIssue(ref int bar) { return null; }
 	}
 }
