@@ -3,8 +3,8 @@
   <Rule TypeName="EnforceResultObjectsInsteadOfRefKeyword" Category="Usage" CheckId="GG1000">
     <Name>Enforce Result Objects Instead of Ref Keyword</Name>
     <Description>The use of the ref keywords on parameters instead of well defined result objects is plain lazy.</Description>
-    <Resolution Name="Introduce">Change the void return type to return the \"{0}\" parameter.</Resolution>
-    <Resolution Name="Extend">Change the return type to an object containing both the existing result, and the \"{0}\" parameter.</Resolution>
+    <Resolution Name="Introduce">Change the void return type to return the "{0}" parameter.</Resolution>
+    <Resolution Name="Extend">Change the return type to an object containing both the existing result, and the "{0}" parameter.</Resolution>
     <MessageLevel Certainty="100">Error</MessageLevel>
     <FixCategories>NonBreaking</FixCategories>
     <Url>http://blog.devbot.net/conventions-refs/</Url>
