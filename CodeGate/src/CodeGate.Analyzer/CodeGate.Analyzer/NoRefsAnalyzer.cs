@@ -29,7 +29,8 @@ namespace CodeGate.Analyzer
             var parameterSyntax = (ParameterSyntax)context.Node;
             var refModifier = parameterSyntax.Modifiers.FirstOrDefault(x => x.ValueText == "ref");
             if (refModifier == default(SyntaxToken)) return;
-            var diagnostic = Diagnostic.Create(Rule, refModifier.GetLocation(), parameterSyntax.Identifier.ValueText);
+            var methodDeclarationSyntax = parameterSyntax.Ancestors().OfType<MethodDeclarationSyntax>().First();
+            var diagnostic = Diagnostic.Create(Rule, methodDeclarationSyntax.GetLocation(), parameterSyntax.Identifier.ValueText);
             context.ReportDiagnostic(diagnostic);
         }
 	}

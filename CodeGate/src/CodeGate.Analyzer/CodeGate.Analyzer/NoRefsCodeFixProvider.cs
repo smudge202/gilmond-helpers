@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Rename;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
 
 namespace CodeGate.Analyzer
 {
-	[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(CodeGateAnalyzerCodeFixProvider)), Shared]
-	public class CodeGateAnalyzerCodeFixProvider : CodeFixProvider
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NoRefsCodeFixProvider)), Shared]
+	public class NoRefsCodeFixProvider : CodeFixProvider
 	{
-		private const string title = "Make uppercase";
+		private const string RefactorReturnTypeTitle = "Remove ref keyword";
 
 		public sealed override ImmutableArray<string> FixableDiagnosticIds
 		{
@@ -38,35 +35,54 @@ namespace CodeGate.Analyzer
 			var diagnostic = context.Diagnostics.First();
 			var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-			// Find the type declaration identified by the diagnostic.
-			var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().First();
+            // Find the type declaration identified by the diagnostic.
+            var methodDeclarationSyntax = root.FindToken(diagnosticSpan.Start).Parent.DescendantNodesAndSelf().OfType<MethodDeclarationSyntax>().First();
 
-			// Register a code action that will invoke the fix.
-			context.RegisterCodeFix(
-				CodeAction.Create(
-					title: title,
-					createChangedSolution: c => MakeUppercaseAsync(context.Document, declaration, c),
-					equivalenceKey: title),
-				diagnostic);
-		}
+            // Register a code action that will invoke the fix.
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    title: RefactorReturnTypeTitle,
+                    createChangedDocument: c => RefactorReturnTypeAsync(context.Document, methodDeclarationSyntax, c),
+                    equivalenceKey: RefactorReturnTypeTitle),
+                diagnostic);
+        }
 
-		private async Task<Solution> MakeUppercaseAsync(Document document, TypeDeclarationSyntax typeDecl, CancellationToken cancellationToken)
-		{
-			// Compute new uppercase name.
-			var identifierToken = typeDecl.Identifier;
-			var newName = identifierToken.Text.ToUpperInvariant();
+        private async Task<Document> RefactorReturnTypeAsync(Document document, MethodDeclarationSyntax methodDeclarationSyntax, CancellationToken cancellationToken)
+        {
+            var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclarationSyntax);
+            SyntaxNode root;
+            if (!document.TryGetSyntaxRoot(out root)) return document;
+            var invocationSyntaxes = GetInvocationSyntaxes(root, semanticModel, methodSymbol, cancellationToken);
+            
+            // Determine ref argument usage (return only or read/return)
+            var flowAnalysis = semanticModel.AnalyzeDataFlow(methodDeclarationSyntax.Body);
+            var oldParameterListSyntax = methodDeclarationSyntax.ParameterList;
+            var refParameters = oldParameterListSyntax.Parameters.Where(x => x.Modifiers.Any(y => y.ValueText == "ref"));
 
-			// Get the symbol representing the type to be renamed.
-			var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
-			var typeSymbol = semanticModel.GetDeclaredSymbol(typeDecl, cancellationToken);
+            // TODO : Improve ref parameter replacement to account for usage
 
-			// Produce a new solution that has all references to that type renamed, including the declaration.
-			var originalSolution = document.Project.Solution;
-			var optionSet = originalSolution.Workspace.Options;
-			var newSolution = await Renamer.RenameSymbolAsync(document.Project.Solution, typeSymbol, newName, optionSet, cancellationToken).ConfigureAwait(false);
+            // Remove ref parameters from parameter list
+            var newParameterListSyntax = SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(oldParameterListSyntax.Parameters.Except(refParameters)));
+            root = root.ReplaceNode(oldParameterListSyntax, newParameterListSyntax);
 
-			// Return the new solution with the now-uppercase type name.
-			return newSolution;
-		}
+            // Change return type of method
+            var oldReturnTypeSyntax = methodDeclarationSyntax.ReturnType;
+            var newReturnTypeSyntax = refParameters.First().Type; // TODO: Handle multiple with return object/struct
+            root = root.ReplaceNode(oldReturnTypeSyntax, newReturnTypeSyntax);
+
+            // TODO : Correct invocations to account for changes
+
+            return await Task.FromResult(document.WithSyntaxRoot(root));
+        }
+
+        private InvocationExpressionSyntax[] GetInvocationSyntaxes(SyntaxNode root, SemanticModel semanticModel, IMethodSymbol methodSymbol, CancellationToken cancellationToken)
+        {
+            return root
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Where(invocationSyntax => semanticModel.GetSymbolInfo(invocationSyntax, cancellationToken).Symbol == methodSymbol)
+                .ToArray();
+        }
 	}
 }

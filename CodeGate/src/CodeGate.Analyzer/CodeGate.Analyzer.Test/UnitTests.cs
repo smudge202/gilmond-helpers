@@ -70,7 +70,7 @@ namespace CodeGate.Analyzer.Test
 
 		protected override CodeFixProvider GetCSharpCodeFixProvider()
 		{
-			return new CodeGateAnalyzerCodeFixProvider();
+			return new NoRefsCodeFixProvider();
 		}
 
 		protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
