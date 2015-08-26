@@ -1,0 +1,25 @@
+﻿{
+	"version": "1.0.0-*",
+	"description": "Command Line Interface",
+	"authors": [ "Tommy Long" ],
+	"tags": [ "" ],
+	"projectUrl": "https://github.com/smudge202/gilmond-helpers/tree/dev/Examples/EventSourcing",
+	"licenseUrl": "https://raw.githubusercontent.com/smudge202/gilmond-helpers/dev/LICENSE",
+
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/smudge202/gilmond-helpers"
+	},
+
+	"dependencies": {
+		"Compose": "0.1.5-beta"
+	},
+
+	"commands": {
+		"Cli": "Cli"
+	},
+
+	"frameworks": {
+		"dotnet": { }
+	}
+}
