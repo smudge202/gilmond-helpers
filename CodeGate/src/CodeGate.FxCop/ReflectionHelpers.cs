@@ -19,31 +19,31 @@ namespace Gilmond.Helpers.CodeGate.FxCop
 			return typeNode.FullName == typeof(void).FullName;
 		}
 
-		private static BindingFlags GetBindingFlags(this Method method)
+		static BindingFlags GetBindingFlags(this Method method)
 		{
 			var result = method.IsPublic ? BindingFlags.Public : BindingFlags.NonPublic;
 			result = result | (method.IsStatic ? BindingFlags.Static : BindingFlags.Instance);
 			return result | BindingFlags.DeclaredOnly;
 		}
 
-		private static Type[] GetParameterTypes(this Method method)
+		static Type[] GetParameterTypes(this Method method)
 		{
 			return method.Parameters.Select(x => x.Type.GetSystemType()).ToArray();
 		}
 
-		private static Type GetSystemType(this TypeNode typeNode)
+		static Type GetSystemType(this TypeNode typeNode)
 		{
 			return Type.GetType(typeNode.FullName, ResolveAssembly, ResolveType, true, false);
 		}
 
-		private static Assembly ResolveAssembly(AssemblyName assemblyName)
+		static Assembly ResolveAssembly(AssemblyName assemblyName)
 		{
 			return null;
 		}
 
-		private static Type ResolveType(Assembly assembly, string typeName, bool ignoreCase)
+		static Type ResolveType(Assembly assembly, string typeName, bool ignoreCase)
 		{
-			var isByRef = typeName.EndsWith("@");
+			var isByRef = typeName.EndsWith("@", StringComparison.InvariantCulture);
 			typeName = typeName.Replace("@", "");
 			var result = Type.GetType(typeName, false, ignoreCase);
 			if (result == null)
@@ -56,7 +56,7 @@ namespace Gilmond.Helpers.CodeGate.FxCop
 			return result;
 		}
 
-		private static Type ScanAssembliesForType(string typeName, bool ignoreCase)
+		static Type ScanAssembliesForType(string typeName, bool ignoreCase)
 		{
 			foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
 				if (assembly.GetType(typeName, false, ignoreCase) != null)

@@ -26,7 +26,7 @@ namespace Gilmond.Helpers.CodeGate.FxCop
 			return Problems;
 		}
 
-		private void AddProblem(string resolutionName, string parameterName)
+		void AddProblem(string resolutionName, string parameterName)
 		{
 			Problems.Add(new Problem(GetNamedResolution(resolutionName, parameterName)));
 		}
