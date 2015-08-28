@@ -42,6 +42,18 @@ namespace CodeGate.Tfs.ApplicationTier.Tests
 			{
 				return new ProjectCollection
 				{
+					Name = RandomString,
+					Projects = RandomNumberOf(() => DefaultProject).ToList().AsReadOnly()
+				};
+			}
+		}
+
+		static Project DefaultProject
+		{
+			get
+			{
+				return new Project
+				{
 					Name = RandomString
 				};
 			}
@@ -69,14 +81,14 @@ namespace CodeGate.Tfs.ApplicationTier.Tests
 			[Unit]
 			public static void WhenTfsServerIsNotProvidedThenThrowsException()
 			{
-				Action act = () => new Tfs2013ListAllProjects(null, DefaultLogger);
+				Action act = () => new DefaultListAllProjects(null, DefaultLogger);
 				act.ShouldThrow<ArgumentNullException>();
 			}
 
 			[Unit]
 			public static void WhenLoggerIsNotProvidedThenThrowsException()
 			{
-				Action act = () => new Tfs2013ListAllProjects(DefaultTfsServer, null);
+				Action act = () => new DefaultListAllProjects(DefaultTfsServer, null);
 				act.ShouldThrow<ArgumentNullException>();
 			}
 		}
@@ -87,7 +99,7 @@ namespace CodeGate.Tfs.ApplicationTier.Tests
 				TfsServer tfsServer = null,
 				ILogger logger = null)
 			{
-				return new Tfs2013ListAllProjects(
+				return new DefaultListAllProjects(
 					tfsServer ?? DefaultTfsServer,
 					logger ?? DefaultLogger);
 			}
@@ -118,6 +130,26 @@ namespace CodeGate.Tfs.ApplicationTier.Tests
 							LogLevel.Information,
 							It.IsAny<int>(),
 							It.Is<object>(state => state is string && state.ToString().Contains(collection.Name)),
+							It.IsAny<Exception>(),
+							It.IsAny<Func<object, Exception, string>>()),
+						Times.Once);
+			}
+
+			[Unit]
+			public static void WhenReturnedCollectionContainsProjectsThenOutputsNamesToLogger()
+			{
+				var collections = DefaultProjectCollections;
+				var tfsServer = new Mock<TfsServer>();
+				tfsServer.Setup(m => m.GetProjectCollections()).Returns(collections);
+				var logger = new Mock<ILogger>();
+
+				CreateTarget(tfsServer.Object, logger.Object).DisplayProjects();
+
+				foreach (var project in collections.SelectMany(x => x.Projects))
+					logger.Verify(m => m.Log(
+							LogLevel.Information,
+							It.IsAny<int>(),
+							It.Is<object>(state => state is string && state.ToString().Contains(project.Name)),
 							It.IsAny<Exception>(),
 							It.IsAny<Func<object, Exception, string>>()),
 						Times.Once);

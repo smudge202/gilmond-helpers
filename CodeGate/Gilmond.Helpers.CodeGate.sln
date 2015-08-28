@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5BFF5983-3ABD-4DA3-A724-471D4477B980}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B8550527-3077-4E4F-BFE8-53BF9D5F6336}"
+	ProjectSection(SolutionItems) = preProject
+		src\CodeGate.Tfs.ApplicationTier\Tfs2013ListAllProjects.cs = src\CodeGate.Tfs.ApplicationTier\Tfs2013ListAllProjects.cs
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGate.FxCop", "src\CodeGate.FxCop\CodeGate.FxCop.csproj", "{BB4643B7-4CB1-498C-B623-CB9ECDE937BA}"
 EndProject

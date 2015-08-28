@@ -1,6 +1,8 @@
 ﻿using Compose;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
+using System.IO;
+using System.Reflection;
 
 namespace CodeGate.Tfs.ApplicationTier
 {
@@ -10,7 +12,8 @@ namespace CodeGate.Tfs.ApplicationTier
 		{
 			var app = new CommandLineApplication();
 
-			var config = new ConfigurationBuilder()
+			var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			var config = new ConfigurationBuilder(basePath)
 				.AddJsonFile("config.json")
 				.Build();			
 

@@ -9,12 +9,15 @@ namespace CodeGate.Tfs.ApplicationTier
 		{
 			services.TryAdd(GetDefaultServices());
 			return services
+				.AddOptions()
 				.ConfigureDefaults();
 		}
 
 		public static IEnumerable<ServiceDescriptor> GetDefaultServices()
 		{
-			yield break;
+			yield return ServiceDescriptor.Transient<Microsoft.Framework.Logging.ILogger, ColouredConsoleLogger>();
+			yield return ServiceDescriptor.Transient<ListAllProjects, DefaultListAllProjects>();
+			yield return ServiceDescriptor.Transient<TfsServer, TfsServer2013>();
 		}
 
 		static IServiceCollection ConfigureDefaults(this IServiceCollection services)
